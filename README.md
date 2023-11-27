@@ -16,5 +16,6 @@ para o serviço online e 1 para o serviço OFFLINE; Preparar a execução automa
 
  # Para a configuração do linux:
  Em algumas distribuição linux o nfs já vem pré instalado nesse caso apenas usamos os comandos:
-   systemctl start nfs-server rpcbind
+ 
+ //  systemctl start nfs-server rpcbind
  
