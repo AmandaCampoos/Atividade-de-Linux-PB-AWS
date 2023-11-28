@@ -10,11 +10,63 @@
 - Criar 1 instância EC2 com o sistema operacional Amazon Linux 2 (Família t3.small, 16 GB SSD);
 - Criar ou escolher uma VPC existente e associar a instancia.
 - Gerar 1 elastic IP e anexar à instância EC2.
-- Liberar as portas de comunicação para acesso público: (22/TCP, 111/TCP e UDP,2049/TCP/UDP, 80/TCP, 443/TCP)Para a liberaçao das portas, cria se um grupo de segurança de entrada e saida. Assim possibilitando o acesso da sua máquina virtual a recursos como o nfs.
+- Liberar as portas de comunicação para acesso público: (22/TCP, 111/TCP e UDP,2049/TCP/UDP, 80/TCP, 443/TCP)Para a liberaçao das portas, cria se um grupo de segurança de entrada e saída. Assim possibilitando o acesso da sua máquina virtual a recursos como o nfs.
 
 
- # Para a configuração do linux:
- Em algumas distribuição linux o nfs já vem pré instalado nesse caso apenas usamos os comandos:
- 
- //  systemctl start nfs-server rpcbind
- 
+ # Para instalação e inicialização nfs:
+#### Em algumas distribuição linux o nfs já vem pré instalado nesse caso apenas usamos os comandos:
+
+
+ ```
+ systemctl start nfs-server
+ systemctl enable nfs-server
+
+```
+#### Caso precise instalar em sua máquina use o seguinte comando:
+
+```
+yum install -y nfs-utils
+
+```
+Rodando o comando abaixo iremos perceber a porta 2049 está escutando.
+```
+ss -ln | grep 2049
+```
+```ruby
+udp   UNCONN 0      0                                  0.0.0.0:2049             0.0.0.0:*           
+udp   UNCONN 0      0                                     [::]:2049                [::]:*           
+tcp   LISTEN 0      64                                 0.0.0.0:2049             0.0.0.0:*           
+tcp   LISTEN 0      64                                    [::]:2049                [::]:*
+```
+
+##### Agora precisamos abrir uma excessão no firewall para os serviço nfs , para que a máquina cliente consiga se conectar com o meu servidor.
+
+caso não esteja instalado como no meu caso na máquina Linux EC2
+instale
+```
+yum -y instalar firewalld
+
+```
+Depois de as permissões necessarias com os comandos:
+```
+
+systemctl start firewalld.service
+systemctl enable firewalld.service
+firewall-cmd --add-service=nfs --permanent
+firewall-cmd --reload
+
+```
+
+
+#### Configuração do nfs 
+o diretótio srv é geralmete ultilizado para serviço entao vou escolher para montar um novo diretório que vai ser compartilhado
+
+cd /srv
+mkdir amanda_campos
+
+se usarmos o comando ls -l
+vamos perceber que ele cria como usuario root então precisamos modificar para dar as permossões necessarias.
+
+chown nfsnobody:nfsnobody /amanda_campos
+
+
