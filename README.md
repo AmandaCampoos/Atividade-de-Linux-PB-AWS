@@ -56,17 +56,45 @@ firewall-cmd --add-service=nfs --permanent
 firewall-cmd --reload
 
 ```
+#### Instalar o Apache será necessário na máquina cliente e sevidor 
+segue as instruçoes para configurar o apache em suas instâncias.
+```
+yum install httpd
+```
+Para baixar.
+```
+```
+systemctl start httpd
+systemctl enable httpd
+```
+O Apache agora será iniciado automaticamente quando o servidor for inicializado novamente.
 
+Use o comando para ver o status e se ele foi instalado corretamente.
+```
+systemctl status httpd
+```
 
 #### Configuração do nfs 
-o diretótio srv é geralmete ultilizado para serviço entao vou escolher para montar um novo diretório que vai ser compartilhado
+o diretótio srv é geralmete ultilizado para serviço nesse caso vou escolher para montar um novo diretório para ser compartilhado.
+com os comandos:
+```
+#cd /srv
+#mkdir amanda_campos
+#ls -l
+```
+vamos criar um arquivo index.html que será compartilhado
+```
+cat > index.html
+<h1> Hello World!</h1>
+Ctrl+d para salvar
 
-cd /srv
-mkdir amanda_campos
+Agora o arquivo /Vim/exports precisa ser alterado com os o diretórios,IPs e premissões necesssária para o compartilhamento:
+```
+vim /etc/exports
+```
+Dentro do arquivo coloque na ordem o diretório, ip que poderá se conectar ao servidor e a permissão."rw" é a permissão de leitura e gravação.
+/srv/amanda_campos 3.239.34.149(rw)
 
-se usarmos o comando ls -l
-vamos perceber que ele cria como usuario root então precisamos modificar para dar as permossões necessarias.
 
-chown nfsnobody:nfsnobody /amanda_campos
 
 
