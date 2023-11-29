@@ -58,11 +58,12 @@ firewall-cmd --reload
 ```
 #### Instalar o Apache será necessário na máquina cliente e sevidor 
 segue as instruçoes para configurar o apache em suas instâncias.
+
 ```
 yum install httpd
 ```
 Para baixar.
-```
+
 ```
 systemctl start httpd
 systemctl enable httpd
@@ -70,6 +71,7 @@ systemctl enable httpd
 O Apache agora será iniciado automaticamente quando o servidor for inicializado novamente.
 
 Use o comando para ver o status e se ele foi instalado corretamente.
+
 ```
 systemctl status httpd
 ```
@@ -83,7 +85,7 @@ com os comandos:
 #ls -l
 ```
 vamos criar um arquivo index.html que será compartilhado
-```
+
 cat > index.html
 <h1> Hello World!</h1>
 Ctrl+d para salvar
