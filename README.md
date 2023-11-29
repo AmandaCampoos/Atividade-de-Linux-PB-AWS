@@ -75,6 +75,7 @@ Use o comando para ver o status e se ele foi instalado corretamente.
 ```
 systemctl status httpd
 ```
+![Captura de tela de 2023-11-29 18-58-35](https://github.com/AmandaCampoos/Desafio/assets/138727208/e22da8b1-9666-4036-baa6-c646a761bd5c)
 
 #### Configuração do nfs 
 o diretótio srv é geralmete ultilizado para serviço nesse caso vou escolher para montar um novo diretório para ser compartilhado.
@@ -112,5 +113,41 @@ com o comando
 ```
 cat /var/www/html/index.html
 ```
-Podemos observar o o arquivo index.html foi exportado com sucesso.
+Podemos observar o arquivo index.html 
+
+## Criar um script que valide se o serviço esta online e envie o resultado da validação para o seu diretorio no nfs;
+O script deve conter - Data HORA + nome do serviço + Status + mensagem personalizada de ONLINE ou offline;
+
+Para criar o script escolha o diretório e dê um nome a ele, nesse exemplo vou chamar de datahora.sh
+
+vim datahora.sh 
+```
+#!bin/bash
+ DATE=$(date '+%D-%M-%Y %H:%M:%S')
+  
+  if systemctl is-active --quiet httpd; then
+                        STATUS="Online"
+                MESSAGE="está online!"
+                FILENAME="online.txt"
+  else
+                STATUS="Offline"
+                        MESSAGE="está offline."
+                FILENAME="offline.txt"
+  fi
+
+  echo "$DATE httpd $STATUS - $MESSAGE" >> /srv/amanda_campos/saida_script.txt
+```
+salve o script e execute os comandos:
+
+```
+chmod +x datahora.sh
+./datahora.sh
+
+```
+
+
+
+
+
+
 
