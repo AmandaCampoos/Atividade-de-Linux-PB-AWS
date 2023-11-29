@@ -87,16 +87,30 @@ com os comandos:
 vamos criar um arquivo index.html que será compartilhado
 
 cat > index.html
-<h1> Hello World!</h1>
-Ctrl+d para salvar
 
 Agora o arquivo /Vim/exports precisa ser alterado com os o diretórios,IPs e premissões necesssária para o compartilhamento:
 ```
 vim /etc/exports
 ```
 Dentro do arquivo coloque na ordem o diretório, ip que poderá se conectar ao servidor e a permissão."rw" é a permissão de leitura e gravação.
+exemplo:
 /srv/amanda_campos 3.239.34.149(rw)
+:wq!(para sair e salvar)
 
+digite o comando "exportfs -s" para salvar e mostar as alterações.
 
+#### Configuração nfs na máquina cliente 
+Siga as instruçoes de instalação de nfs e apache disponivél mais á cima. Com o nfs e htpptd startado siga em frente para que funcione corretamente a aplicação.
+Optei por usar o ```mount```para montar esse compartilhamento NFS. nesse exemplo abaixo o ip é o servidor que exporta o sistema de arquivos que você deseja montar,srv/amanda_campos é o sistema de arquivo ou diretório sendo exportado do servidor, ou seja, o diretório que você deseja montar. e o /var/www/html é o local do cliente onde /remote/export é montado.
 
+```
+mount -t nfs4 52.0.247.44:srv/amanda_campos /var/www/html
+
+```
+com o comando 
+
+```
+cat /var/www/html/index.html
+```
+Podemos observar o o arquivo index.html foi exportado com sucesso.
 
