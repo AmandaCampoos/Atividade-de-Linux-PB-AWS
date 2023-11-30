@@ -1,19 +1,17 @@
-# Descrição para o Atividade de Linux, AWS e servidores.
+## Descrição para o Atividade de Linux, AWS e servidores.
 
 
-### O Desafio consiste em Criar 1 instância EC2 AWS com o sistema operacional Amazon Linux, Configurar o servidor NFS, Subir um apache no servidor - o apache deve estar online e rodando. 
-### Criar um script que valide se o serviço esta online e envie o resultado da validação para o seu diretorio no nfs;
-### O script deve conter - Data HORA + nome do serviço + Status + mensagem personalizada de ONLINE ou offline; O script deve gerar 2 arquivos de saida: 1 para o serviço online e 1 para o serviço OFFLINE; Preparar a execução automatizada do script a cada 5 minutos.
+ O Desafio consiste em Criar 1 instância EC2 AWS com o sistema operacional Amazon Linux, Configurar o servidor NFS, Subir um apache no servidor - o apache deve estar online e rodando. Criar um script que valide se o serviço esta online e envie o resultado da validação para o seu diretorio no nfs;O script deve conter - Data HORA + nome do serviço + Status + mensagem personalizada de ONLINE ou offline; O script deve gerar 2 arquivos de saida: 1 para o serviço online e 1 para o serviço OFFLINE; Preparar a execução automatizada do script a cada 5 minutos.
 
 
-# Para iniciar a instacia EC2 vamos ultizar os recursos:
+## Para iniciar a instacia EC2 vamos ultizar os recursos:
 - Criar 1 instância EC2 com o sistema operacional Amazon Linux 2 (Família t3.small, 16 GB SSD);
 - Criar ou escolher uma VPC existente e associar a instancia.
 - Gerar 1 elastic IP e anexar à instância EC2.
 - Liberar as portas de comunicação para acesso público: (22/TCP, 111/TCP e UDP,2049/TCP/UDP, 80/TCP, 443/TCP)Para a liberaçao das portas, cria se um grupo de segurança de entrada e saída. Assim possibilitando o acesso da sua máquina virtual a recursos como o nfs.
 
 
- # Para instalação e inicialização nfs:
+ ## Para instalação e inicialização nfs:
 #### Em algumas distribuição linux o nfs já vem pré instalado nesse caso apenas usamos os comandos:
 
 
@@ -22,7 +20,7 @@
  systemctl enable nfs-server
 
 ```
-#### Caso precise instalar em sua máquina use o seguinte comando:
+Caso precise instalar em sua máquina use o seguinte comando:
 
 ```
 yum install -y nfs-utils
@@ -68,7 +66,7 @@ Para baixar.
 systemctl start httpd
 systemctl enable httpd
 ```
-O Apache agora será iniciado automaticamente quando o servidor for inicializado novamente.
+O Apache agora será iniciado automaticamente quando o servidor for inicializado.
 
 Use o comando para ver o status e se ele foi instalado corretamente.
 
@@ -123,7 +121,7 @@ Podemos observar o arquivo index.html
 ![Captura de tela de 2023-11-29 19-35-09](https://github.com/AmandaCampoos/Desafio/assets/138727208/ca1221bc-75be-4c34-b4a9-11f172aebc36)
 
 
-## Criar um script que valide se o serviço esta online e envie o resultado da validação para o seu diretorio no nfs;
+#### Criar um script que valide se o serviço esta online e envie o resultado da validação para o seu diretorio no nfs;
 O script deve conter - Data HORA + nome do serviço + Status + mensagem personalizada de ONLINE ou offline;
 
 Para criar o script escolha o diretório e dê um nome a ele, nesse exemplo vou chamar de datahora.sh
@@ -167,7 +165,7 @@ Detalhes da configuração Crontab
 ![Captura de tela de 2023-11-30 12-35-21](https://github.com/AmandaCampoos/Desafio/assets/138727208/4575dd35-4da1-4ca9-9e53-cedf798b0c31)
 
 
-Finalizamos esse projeto aqui e obrigada pela sua atenção.
+### Finalizamos esse projeto aqui e obrigada pela sua atenção.
 
 
 
