@@ -28,7 +28,7 @@
 yum install -y nfs-utils
 
 ```
-Rodando o comando abaixo iremos perceber a porta 2049 está escutando.
+Rodando o comando abaixo iremos perceber que a porta 2049 está escutando é importante se  atentar a isso para o bom funcionamento da máquina e evitar problemas futuro com seu servidor.
 ```
 ss -ln | grep 2049
 ```
@@ -99,6 +99,7 @@ exemplo:
 :wq!(para sair e salvar)
 
 digite o comando "exportfs -s" para salvar e mostar as alterações.
+neste caso teste o ip é da minha máquina cliente.
 
 #### Configuração nfs na máquina cliente 
 Siga as instruçoes de instalação de nfs e apache disponivél mais á cima. Com o nfs e htpptd startado siga em frente para que funcione corretamente a aplicação.
@@ -108,12 +109,19 @@ Optei por usar o ```mount```para montar o compartilhamento NFS. nesse exemplo ab
 mount -t nfs4 52.0.247.44:srv/amanda_campos /var/www/html
 
 ```
+
+![Captura de tela de 2023-11-30 12-39-42](https://github.com/AmandaCampoos/Desafio/assets/138727208/cf5e3c84-6cc1-4851-b0f4-d684443be45f)
+
+
 com o comando 
 
 ```
 cat /var/www/html/index.html
 ```
 Podemos observar o arquivo index.html 
+
+![Captura de tela de 2023-11-29 19-35-09](https://github.com/AmandaCampoos/Desafio/assets/138727208/ca1221bc-75be-4c34-b4a9-11f172aebc36)
+
 
 ## Criar um script que valide se o serviço esta online e envie o resultado da validação para o seu diretorio no nfs;
 O script deve conter - Data HORA + nome do serviço + Status + mensagem personalizada de ONLINE ou offline;
@@ -140,10 +148,30 @@ vim datahora.sh
 salve o script e execute os comandos:
 
 ```
-chmod +x datahora.sh
-./datahora.sh
+[root@ip-10-0-19-137 amanda_campos]# chmod +x datahora.sh
+[root@ip-10-0-19-137 amanda_campos]# . /srv/amanda_campos/datahora.sh
 
 ```
+logo veremos nosso script rodando e funcionando. Para isso acontecer utilizamos também o serviço de "crontab" para preparar a execução automatizada do script a
+cada 5 minutos.
+
+com o comando ```crontab -e``` você consegue adicionar serviço de contagem de horas para execução automatica de script.
+com o comando ```crontab -f```você consegue exibir todos os trabalhos no cron/crontab.
+
+
+![Captura de tela de 2023-11-30 10-16-25](https://github.com/AmandaCampoos/Desafio/assets/138727208/7cd42b0c-35ea-4e9c-8da6-cea959f5b814)
+
+
+Detalhes da configuração Crontab 
+
+![Captura de tela de 2023-11-30 12-35-21](https://github.com/AmandaCampoos/Desafio/assets/138727208/4575dd35-4da1-4ca9-9e53-cedf798b0c31)
+
+
+Finalizamos esse projeto aqui e obrigada pela sua atenção.
+
+
+
+
 
 
 
