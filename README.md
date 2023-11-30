@@ -102,7 +102,7 @@ digite o comando "exportfs -s" para salvar e mostar as alterações.
 
 #### Configuração nfs na máquina cliente 
 Siga as instruçoes de instalação de nfs e apache disponivél mais á cima. Com o nfs e htpptd startado siga em frente para que funcione corretamente a aplicação.
-Optei por usar o ```mount```para montar esse compartilhamento NFS. nesse exemplo abaixo o ip é o servidor que exporta o sistema de arquivos que você deseja montar,srv/amanda_campos é o sistema de arquivo ou diretório sendo exportado do servidor, ou seja, o diretório que você deseja montar. e o /var/www/html é o local do cliente onde /remote/export é montado.
+Optei por usar o ```mount```para montar o compartilhamento NFS. nesse exemplo abaixo o ip  do servidor que exporta o sistema de arquivos que você deseja compartilhar ,srv/amanda_campos é o sistema de arquivo ou diretório sendo exportado do servidor, ou seja, o diretório que você deseja montar. e o /var/www/html é o local do cliente onde /remote/export é montado.
 
 ```
 mount -t nfs4 52.0.247.44:srv/amanda_campos /var/www/html
