@@ -1,4 +1,4 @@
-## Descrição para o Atividade de Linux, AWS e servidores.
+## Descrição para o Atividade de Linux, AWS e servidores.✅
 
 
  O Desafio consiste em Criar 1 instância EC2 AWS com o sistema operacional Amazon Linux, Configurar o servidor NFS, Subir um apache no servidor - o apache deve estar online e rodando. Criar um script que valide se o serviço esta online e envie o resultado da validação para o seu diretorio no nfs;O script deve conter - Data HORA + nome do serviço + Status + mensagem personalizada de ONLINE ou offline; O script deve gerar 2 arquivos de saida: 1 para o serviço online e 1 para o serviço OFFLINE; Preparar a execução automatizada do script a cada 5 minutos.
@@ -96,7 +96,7 @@ exemplo:
 /srv/amanda_campos 3.239.34.149(rw)
 :wq!(para sair e salvar)
 
-digite o comando "exportfs -s" para salvar e mostar as alterações.
+digite o comando "exportfs -rav" para salvar e mostar as alterações.
 neste caso teste o ip é da minha máquina cliente.
 
 #### Configuração nfs na máquina cliente 
@@ -121,27 +121,36 @@ Podemos observar o arquivo index.html
 ![Captura de tela de 2023-11-29 19-35-09](https://github.com/AmandaCampoos/Desafio/assets/138727208/ca1221bc-75be-4c34-b4a9-11f172aebc36)
 
 
+Assim se digitar o ip público no navegador você poderá encontrar seu arquivo index.html
+
+![Captura de tela de 2023-11-30 20-27-58](https://github.com/AmandaCampoos/Desafio/assets/138727208/144a3825-9a02-40df-861c-9f88c1d37934)
+
+
 #### Criar um script que valide se o serviço esta online e envie o resultado da validação para o seu diretorio no nfs;
 O script deve conter - Data HORA + nome do serviço + Status + mensagem personalizada de ONLINE ou offline;
 
 Para criar o script escolha o diretório e dê um nome a ele, nesse exemplo vou chamar de datahora.sh
 
 vim datahora.sh 
+
 ```
-#!bin/bash
+#!bin/bash #!bin/bash
  DATE=$(date '+%D-%M-%Y %H:%M:%S')
-  
-  if systemctl is-active --quiet httpd; then
-                        STATUS="Online"
+ SERVICO="httpd"
+ STATUS=$(systemctl is-active $SERVICO)
+
+  if [ "$STATUS" = "active" ];then
+                STATUS="Online"
                 MESSAGE="está online!"
-                FILENAME="online.txt"
+                FILENAME="/srv/amanda_campos/online.txt"
   else
                 STATUS="Offline"
                         MESSAGE="está offline."
-                FILENAME="offline.txt"
+                FILENAME="/srv/amanda_campos/offline.txt"
   fi
 
-  echo "$DATE httpd $STATUS - $MESSAGE" >> /srv/amanda_campos/saida_script.txt
+
+  echo "$DATE httpd $STATUS - $MESSAGE" >> "$FILENAME"
 ```
 salve o script e execute os comandos:
 
@@ -154,6 +163,11 @@ logo veremos nosso script rodando e funcionando. Para isso acontecer utilizamos 
 cada 5 minutos.
 
 com o comando ```crontab -e``` você consegue adicionar serviço de contagem de horas para execução automatica de script.
+
+![Captura de tela de 2023-11-30 13-31-30](https://github.com/AmandaCampoos/Desafio/assets/138727208/f431ae4b-318d-49fc-94af-a3eaf8889ec1)
+
+
+
 com o comando ```crontab -f```você consegue exibir todos os trabalhos no cron/crontab.
 
 
@@ -165,7 +179,7 @@ Detalhes da configuração Crontab
 ![Captura de tela de 2023-11-30 12-35-21](https://github.com/AmandaCampoos/Desafio/assets/138727208/4575dd35-4da1-4ca9-9e53-cedf798b0c31)
 
 
-### Finalizamos esse projeto aqui e obrigada pela sua atenção.
+### Finalizamos esse projeto aqui ❤️ obrigada pela sua atenção.
 
 
 
